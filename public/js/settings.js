@@ -47,7 +47,7 @@ function putPlayer(player) {
     const text = document.createTextNode(player.name);
     div.id = `skribblr-${player.id}`;
     p.appendChild(text);
-    p.classList.add('text-center');
+    p.classList.add('text-center', 'player-name');
     img.src = player.avatar;
     img.alt = player.name;
     img.classList.add('img-fluid', 'rounded-circle');

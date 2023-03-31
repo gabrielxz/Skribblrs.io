@@ -1,6 +1,7 @@
 const style = document.querySelector('#style');
 const bgColor = document.querySelector('#bgColor');
 const playerName = document.querySelector('#playerName');
+const randomizeBtn = document.querySelector('#randomizeAvatar');
 const baseURL = 'https://avatars.dicebear.com/api';
 const my = {
     name: localStorage.getItem('name') || '',
@@ -13,10 +14,14 @@ settings.src = 'js/settings.js';
 game.src = 'js/game.js';
 document.body.append(settings, game);
 
-function updateAvatar() {
+function generateRandomSeed() {
+    return Math.random().toString(36).substr(2, 5);
+}
+
+function updateAvatar(seed) {
     const sprite = style.value.toLowerCase();
     const color = bgColor.value.substring(1);
-    const url = `${baseURL}/${sprite}/${playerName.value}.svg?b=%23${color}`;
+    const url = `${baseURL}/${sprite}/${seed}.svg?b=%23${color}`;
     const newAvatar = document.createElement('img');
     newAvatar.src = url;
     newAvatar.alt = 'Avatar';
@@ -38,4 +43,6 @@ window.onload = () => {
 
 style.addEventListener('input', updateAvatar);
 bgColor.addEventListener('input', updateAvatar);
-playerName.addEventListener('change', updateAvatar);
+//playerName.addEventListener('change', updateAvatar);
+randomizeBtn.addEventListener('click', () => updateAvatar(generateRandomSeed()));
+

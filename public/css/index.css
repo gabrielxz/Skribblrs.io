@@ -175,3 +175,9 @@ div.players div.row:nth-of-type(2n) {
         height: 5em;
     }
 }
+
+.player-name {
+    color: #333333;
+    font-weight: bold;
+}
+

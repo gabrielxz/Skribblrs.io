@@ -16,12 +16,8 @@
                         <select class="form-select" id="style">
                             <option value="Avataaars" selected>Avataaars</option>
                             <option value="Bottts">Bottts</option>
+                            <option value="Croodles">Croodles</option>
                             <option value="Female">Female</option>
-                            <option value="Gridy">Gridy</option>
-                            <option value="Human">Human</option>
-                            <option value="Identicon">Identicon</option>
-                            <option value="Initials">Initials</option>
-                            <option value="Jdenticon">Jdenticon</option>
                             <option value="Male">Male</option>
                         </select>
                     </div>
@@ -29,6 +25,9 @@
                         <label class="input-group-text" for="bgColor" class="form-label">Background Color</label>
                         <input type="color" class="form-control form-control-color" id="bgColor" value="#FFFFFF"
                             title="Choose your color">
+                    </div>
+                    <div>
+                        <button class="btn btn-primary mt-3" id="randomizeAvatar">Randomize Avatar</button> <!-- Added Randomize button -->
                     </div>
                 </div>
                 <% if(!roomID) { %>

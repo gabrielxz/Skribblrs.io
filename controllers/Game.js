@@ -55,6 +55,13 @@ class Game {
     async giveTurnTo(players, i) {
         const { io, socket } = this;
         const { roomID } = socket;
+        
+        // Check if games[roomID] exists before proceeding
+        if (!games[roomID]) {
+            console.log(`Game room with ID ${roomID} does not exist.`);
+            return;
+        }
+    
         const { time } = games[roomID];
         const player = players[i];
         const prevPlayer = players[(i - 1 + players.length) % players.length];
@@ -79,6 +86,7 @@ class Game {
             console.log(error);
         }
     }
+    
 
     onMessage(data) {
         const { io, socket } = this;

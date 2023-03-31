@@ -39,6 +39,12 @@ class Game {
 
     async startGame() {
         const { io, socket } = this;
+    
+        if (!games[socket.roomID]) {
+            console.error(`Error: Game with roomID ${socket.roomID} not found.`);
+            return;
+        }
+    
         const { rounds } = games[socket.roomID];
         const players = Array.from(await io.in(socket.roomID).allSockets());
         socket.to(socket.roomID).emit('startGame');
@@ -51,6 +57,7 @@ class Game {
         io.to(socket.roomID).emit('endGame', { stats: games[socket.roomID] });
         delete games[socket.roomID];
     }
+    
 
     async giveTurnTo(players, i) {
         const { io, socket } = this;

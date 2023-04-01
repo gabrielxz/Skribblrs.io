@@ -43,6 +43,9 @@ window.onload = () => {
 
 style.addEventListener('input', updateAvatar);
 bgColor.addEventListener('input', updateAvatar);
-//playerName.addEventListener('change', updateAvatar);
 randomizeBtn.addEventListener('click', () => updateAvatar(generateRandomSeed()));
+playerName.addEventListener('change', () => {
+    my.name = playerName.value;
+    localStorage.setItem('name', playerName.value);
+});
 

@@ -179,5 +179,8 @@ div.players div.row:nth-of-type(2n) {
 .player-name {
     color: #333333;
     font-weight: bold;
+    background-color: #c8c8c8;
+    padding: 5px;
+    border-radius: 5px;
 }
 

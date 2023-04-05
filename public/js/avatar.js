@@ -10,6 +10,7 @@ const my = {
 
 const settings = document.createElement('script');
 const game = document.createElement('script');
+const maxNameLength = 12; 
 settings.src = 'js/settings.js';
 game.src = 'js/game.js';
 document.body.append(settings, game);
@@ -31,8 +32,8 @@ function updateAvatar(seed) {
         document.querySelector('#avatar').replaceWith(newAvatar);
     });
     my.avatar = url;
-    my.name = playerName.value;
-    localStorage.setItem('name', playerName.value);
+    my.name = sanitizePlayerName(playerName.value);
+    localStorage.setItem('name', my.name);
     localStorage.setItem('avatar', url);
 }
 
@@ -41,11 +42,16 @@ window.onload = () => {
     if (localStorage.getItem('name')) playerName.setAttribute('value', localStorage.getItem('name'));
 };
 
+function sanitizePlayerName(name) {
+    const sanitized = name.replace(/[^a-z0-9]/gi, '').substr(0, maxNameLength);
+    return sanitized;
+}
+
 style.addEventListener('input', updateAvatar);
 bgColor.addEventListener('input', updateAvatar);
 randomizeBtn.addEventListener('click', () => updateAvatar(generateRandomSeed()));
 playerName.addEventListener('change', () => {
-    my.name = playerName.value;
-    localStorage.setItem('name', playerName.value);
+    my.name = sanitizePlayerName(playerName.value);
+    localStorage.setItem('name', my.name);
 });
 

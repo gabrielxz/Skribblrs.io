@@ -171,7 +171,7 @@ socket.on('chooseWord', async ([word1, word2, word3]) => {
     clearInterval(timerID);
     clock.stop();
     yourTurn.play();
-    pickWordID = setTimeout(() => chooseWord(word2), 15000);
+    pickWordID = setTimeout(() => chooseWord(word2), 20000);
 });
 
 socket.on('hideWord', ({ word }) => {
@@ -245,6 +245,14 @@ socket.on('endGame', async ({ stats }) => {
 document.querySelector('#sendMessage').addEventListener('submit', function (e) {
     e.preventDefault();
     const message = this.firstElementChild.value;
+    
+    // Sanitize the input by only allowing alphanumeric characters
+    const sanitizedMessage = message.replace(/[^a-zA-Z0-9]/g, '');
+
+    // Limit the message length to 30 characters
+    const limitedMessage = sanitizedMessage.substring(0, 30);
+
     this.firstElementChild.value = '';
-    socket.emit('message', { message });
+    socket.emit('message', { message: sanitizedMessage });
 });
+
